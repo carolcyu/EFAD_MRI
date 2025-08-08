@@ -44,16 +44,8 @@
     /* define instructions trial */
     var instructions = {
       type: jsPsychHtmlKeyboardResponse,
-      stimulus: `
-        <p>In this task, an image will appear on the screen.</p> <p>Using the response pad, please rate <strong>HOW PLEASANT an image is</strong>, as quickly as you can. If the image is...</p>     
-          <p><strong>Very unpleasant</strong>, press the button 1</p>
-        <p><strong>Unpleasant</strong>, press the button 2</p>
-        <p><strong>Pleasant</strong>, press the button 3</p>
-        <p><strong>Very pleasant</strong>, press the button 4.</p>
-       <p> <img src='img/response_key.png' alt='Key'></div></p>
-        <p>Press any button to continue.</p>
-      `,
-      post_trial_gap: 1000
+      stimulus: "<p>In this task, an image will appear on the screen.</p> <p>Using the response pad, please rate <strong>HOW PLEASANT an image is</strong>, as quickly as you can. If the image is...</p><p><strong>Very unpleasant</strong>, press the button 1</p><p><strong>Unpleasant</strong>, press the button 2</p><p><strong>Pleasant</strong>, press the button 3</p><p><strong>Very pleasant</strong>, press the button 4.</p><p> <img src='img/response_key.png' alt='Key'></div></p><p>Press any button to continue.</p>",
+      post_trial_gap: 1000,
     };
     timeline.push(instructions);
 /*questions for the examiner*/
