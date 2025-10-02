@@ -37,7 +37,6 @@ Qualtrics.SurveyEngine.addOnload(function()
                 })
                 .fail(function(jqxhr, settings, exception) {
                     console.error('Failed to load script:', url, exception);
-                    // Display a more informative error message
                     jQuery('#display_stage').html(
                         '<h3>Error</h3>' +
                         '<p>Could not load a required file for the experiment.</p>' +
@@ -53,7 +52,7 @@ Qualtrics.SurveyEngine.addOnload(function()
         window.task_github + "jspsych/jspsych.js",
         window.task_github + "jspsych/plugin-html-keyboard-response.js",
         window.task_github + "jspsych/plugin-image-keyboard-response.js",
-        window.task_github + "jspsych/plugin-preload.js" // FIX: Added the missing preload plugin
+        window.task_github + "jspsych/plugin-preload.js"
     ];
 
     // Load CSS files
@@ -79,20 +78,9 @@ Qualtrics.SurveyEngine.addOnload(function()
 
             var timeline = [];
 
-            // FIX: Added the preload block to load images before the task starts
-            var preload = {
-                type: jsPsychPreload,
-                images: [
-                    window.task_github + 'img/response_key.png',
-                    // Add all your image paths here to be preloaded
-                    // Example format: window.task_github + 'iaps_neg/1525.jpg',
-                ],
-                message: 'Loading images, please wait...'
-            };
-            // Dynamically create a list of all images from the stimuli to preload them
+            // Preload all images before the task starts
             var all_images = [window.task_github + 'img/response_key.png'];
             var test_stimuli = [
-                // This is the full list from your index.html
                 {stimulus: 'iaps_neg/1525.jpg'}, {stimulus: 'iaps_neg/2345_1.jpg'}, {stimulus: 'iaps_neg/3150.jpg'},
                 {stimulus: 'iaps_neg/3170.jpg'}, {stimulus: 'iaps_neg/7380.jpg'}, {stimulus: 'iaps_neg/9140.jpg'},
                 {stimulus: 'iaps_neg/9184.jpg'}, {stimulus: 'iaps_neg/9301.jpg'}, {stimulus: 'iaps_neg/9326.jpg'},
@@ -112,4 +100,97 @@ Qualtrics.SurveyEngine.addOnload(function()
             test_stimuli.forEach(function(item) {
                 all_images.push(window.task_github + item.stimulus);
             });
-            preload.images = all_images; // Set the full image list
+
+            var preload = {
+                type: jsPsychPreload,
+                images: all_images,
+                message: 'Loading images, please wait...'
+            };
+            timeline.push(preload);
+
+            // --- The rest of your E-FAD Experiment Timeline --- //
+            var welcome = {
+                type: jsPsychHtmlKeyboardResponse,
+                stimulus: "Welcome to another Image Rating Task! </p> <p>Press any button for instructions. </p>"
+            };
+            timeline.push(welcome);
+
+            var instructions = {
+                type: jsPsychHtmlKeyboardResponse,
+                stimulus: "<p>In this task, an image will appear on the screen.</p> <p>Using the response pad, please rate <strong>HOW PLEASANT an image is</strong>, as quickly as you can. If the image is...</p><p><strong>Very unpleasant</strong>, press the button 1</p><p><strong>Unpleasant</strong>, press the button 2</p><p><strong>Pleasant</strong>, press the button 3</p><p><strong>Very pleasant</strong>, press the button 4.</p><p> <img src='" + window.task_github + "img/response_key.png' alt='Key'></div></p><p>Press any button to continue.</p>",
+                post_trial_gap: 1000,
+            };
+            timeline.push(instructions);
+
+            var questions = {
+                type: jsPsychHtmlKeyboardResponse,
+                stimulus: "<p>If you have questions or concerns, please signal to the examiner. </p> <p>If not, press any button to continue. </p>"
+            };
+            timeline.push(questions);
+
+            var MRIstart = {
+                type: jsPsychHtmlKeyboardResponse,
+                stimulus: "<p> Please wait while the scanner starts up. This will take 10 seconds. </strong></p>",
+                choices: ['5'],
+                prompt: "<p> A cross (+) will appear when the task starts. </p>",
+                data: { task: 'mri_start' }
+            };
+            timeline.push(MRIstart);
+
+            var fixation = {
+                type: jsPsychHtmlKeyboardResponse,
+                stimulus: '<div style="font-size:60px;">+</div>',
+                choices: "NO_KEYS",
+                trial_duration: 1000,
+                data: { task: 'fixation' }
+            };
+
+            var test = {
+                type: jsPsychImageKeyboardResponse,
+                stimulus: jsPsych.timelineVariable('stimulus'),
+                choices: "NO_KEYS",
+                trial_duration: 2000,
+                stimulus_height: 650,
+                maintain_aspect_ration: true,
+            };
+
+            var response = {
+                type: jsPsychHtmlKeyboardResponse,
+                stimulus: "<p>How would you rate this image? </p>",
+                choices: ['1', '2', '3', '4'],
+                trial_duration: 3000,
+                response_ends_trial: false,
+                data: { task: 'response' }
+            };
+
+            var test_procedure = {
+                timeline: [fixation, test, response],
+                timeline_variables: test_stimuli.map(item => ({ stimulus: window.task_github + item.stimulus })),
+                repetitions: 1,
+                randomize_order: false,
+                post_trial_gap: 500,
+            };
+            timeline.push(test_procedure);
+
+            var debrief_block = {
+                type: jsPsychHtmlKeyboardResponse,
+                stimulus: function() {
+                    var trials = jsPsych.data.get().filter({task: 'response'});
+                    var rt = Math.round(trials.select('rt').mean());
+                    return `<p>Your average response time was ${rt}ms.</p><p>Press any key to complete the experiment. Thank you for your time!</p>`;
+                }
+            };
+            timeline.push(debrief_block);
+
+            // This command starts the experiment
+            jsPsych.run(timeline);
+
+        } catch (error) {
+            console.error('Error initializing experiment:', error);
+            jQuery('#display_stage').html('<p style="color: red;">A critical error occurred while initializing the experiment. Please contact the study administrator.</p>');
+        }
+    }
+});
+
+Qualtrics.SurveyEngine.addOnReady(function() { /* ... */ });
+Qualtrics.SurveyEngine.addOnUnload(function() { /* ... */ });
