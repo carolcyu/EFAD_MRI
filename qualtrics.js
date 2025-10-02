@@ -97,8 +97,10 @@ Qualtrics.SurveyEngine.addOnload(function()
                 {stimulus: 'iaps_pos/7400.jpg'}, {stimulus: 'iaps_pos/7492.jpg'}, {stimulus: 'iaps_pos/8380.jpg'},
                 {stimulus: 'iaps_pos/8503.jpg'}
             ];
+            
+            // <<< FIX: Added '/img/' to the path to correctly locate the image files >>>
             test_stimuli.forEach(function(item) {
-                all_images.push(window.task_github + item.stimulus);
+                all_images.push(window.task_github + 'img/' + item.stimulus);
             });
 
             var preload = {
@@ -165,7 +167,8 @@ Qualtrics.SurveyEngine.addOnload(function()
 
             var test_procedure = {
                 timeline: [fixation, test, response],
-                timeline_variables: test_stimuli.map(item => ({ stimulus: window.task_github + item.stimulus })),
+                // <<< FIX: Added '/img/' to the path for the actual trials as well >>>
+                timeline_variables: test_stimuli.map(item => ({ stimulus: window.task_github + 'img/' + item.stimulus })),
                 repetitions: 1,
                 randomize_order: false,
                 post_trial_gap: 500,
