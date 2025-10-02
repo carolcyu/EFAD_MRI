@@ -29,8 +29,8 @@ Qualtrics.SurveyEngine.addOnload(function()
     // Insert at the top of the question area
     jQuery('.QuestionOuter').prepend(displayDiv);
     
-    // <<< IMPORTANT: Make sure this URL points to your E-FAD task's GitHub repository >>>
-    window.task_github = "https://carolcyu.github.io/STT_MRI/"; // Or your E-FAD repo
+    // <<< IMPORTANT: Confirm this is the correct URL for your E-FAD task assets >>>
+    window.task_github = "https://carolcyu.github.io/STT_MRI/"; 
     
     // Load the experiment
     if (typeof jQuery !== 'undefined') {
@@ -41,7 +41,7 @@ Qualtrics.SurveyEngine.addOnload(function()
         // Update display
         jQuery('#display_stage').html('<h3>Loading Experiment...</h3><p>Please wait while we load the task.</p>');
         
-        // Load CSS first
+        // Load CSS
         jQuery("<link rel='stylesheet' href='" + window.task_github + "jspsych/jspsych.css'>").appendTo('head');
         jQuery("<link rel='stylesheet' href='" + window.task_github + "jspsych/my_experiment_style_MRI.css'>").appendTo('head');
         
@@ -49,9 +49,7 @@ Qualtrics.SurveyEngine.addOnload(function()
         var scripts = [
             window.task_github + "jspsych/jspsych.js",
             window.task_github + "jspsych/plugin-image-keyboard-response.js",
-            window.task_github + "jspsych/plugin-html-button-response.js", 
-            window.task_github + "jspsych/plugin-html-keyboard-response.js", 
-            window.task_github + "jspsych/plugin-categorize-html.js"
+            window.task_github + "jspsych/plugin-html-keyboard-response.js"
         ];
         
         loadScripts(0);
@@ -80,29 +78,20 @@ function initExp(){
             return;
         }
         
-        // Add focus management
-        var focusInterval = setInterval(function() {
-            var displayStage = document.getElementById('display_stage');
-            if (displayStage) {
-                displayStage.focus();
-            }
-        }, 1000);
-        
         var jsPsych = initJsPsych({
             display_element: 'display_stage',
             on_finish: function() {
-                clearInterval(focusInterval);
-                
-                // <<< CHANGE: Save data to an embedded data field named "EFAD" >>>
+                // <<< FIX: Saving data to the correct "EFAD" embedded data field >>>
                 var EFAD_data = jsPsych.data.get().json();
                 Qualtrics.SurveyEngine.setEmbeddedData("EFAD", EFAD_data);
                 
+                // Clean up and proceed
                 jQuery('#display_stage').remove();
                 qthis.clickNextButton();
             }
         }); 
       
-      // <<< CHANGE: The entire experiment timeline from your E-FAD index.html is inserted here. >>>
+      // <<< This is the timeline from your E-FAD index.html file >>>
       var timeline = [];
 
       var welcome = {
@@ -147,7 +136,6 @@ function initExp(){
         {stimulus: window.task_github + 'iaps_neg/9326.jpg'},
         {stimulus: window.task_github + 'iaps_neg/9611.jpg'},
         {stimulus: window.task_github + 'iaps_neg/9903.jpg'},
-
         {stimulus: window.task_github + 'iaps_neut/6150.jpg'},
         {stimulus: window.task_github + 'iaps_neut/7001.jpg'},
         {stimulus: window.task_github + 'iaps_neut/7002.jpg'},
@@ -159,7 +147,6 @@ function initExp(){
         {stimulus: window.task_github + 'iaps_neut/7100.jpg'},
         {stimulus: window.task_github + 'iaps_neut/7150.jpg'},
         {stimulus: window.task_github + 'iaps_neut/7705.jpg'},
-
         {stimulus: window.task_github + 'sdvp/3068.jpg'},
         {stimulus: window.task_github + 'sdvp/6570.jpg'},
         {stimulus: window.task_github + 'sdvp/SDVPS_1.jpg'},
@@ -170,7 +157,6 @@ function initExp(){
         {stimulus: window.task_github + 'sdvp/SDVPS_6.jpg'},
         {stimulus: window.task_github + 'sdvp/SDVPS_7.jpg'},
         {stimulus: window.task_github + 'sdvp/SDVPS_8.jpg'},
-
         {stimulus: window.task_github + 'iaps_pos/1463.jpg'},
         {stimulus: window.task_github + 'iaps_pos/1811.jpg'},
         {stimulus: window.task_github + 'iaps_pos/2071.jpg'},
@@ -208,7 +194,7 @@ function initExp(){
         stimulus: "<p>How would you rate this image? </p>",
         choices: ['1', '2', '3', '4'],
         trial_duration: 3000,
-        response_ends_trial: false,
+        response_ends_trial: false, // Let the trial end based on duration
         data: {
           task: 'response'
         }
