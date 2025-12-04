@@ -311,7 +311,7 @@ var test = { type: jsPsychImageKeyboardResponse, stimulus: jsPsych.timelineVaria
 
 var response = { 
 	type: jsPsychHtmlKeyboardResponse, stimulus: "<p>How would you rate this image?</p>", 
-	 choices: ['1', '2', '3', '4'], trial_duration: 1500, 
+	 choices: ['1', '2', '3', '4'], trial_duration: 1400, 
 	 response_ends_trial: false,
   data: {
     task: 'response'
