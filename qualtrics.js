@@ -322,7 +322,7 @@ var response = {
 };
 
 			var test_procedure = { 
-				timeline: [fixation, test, response], timeline_variables: test_stimuli, repetitions: 1, randomize_order: false, post_trial_gap: 500 };
+				timeline: [fixation, test, response], timeline_variables: test_stimuli, repetitions: 2, randomize_order: false, post_trial_gap: 250 };
 			timeline.push(test_procedure);
 
 			var debrief_block = {
