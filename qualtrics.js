@@ -305,7 +305,7 @@ var test = { type: jsPsychImageKeyboardResponse, stimulus: jsPsych.timelineVaria
 	choices: "NO_KEYS", 
 	trial_duration: 750, 
 	stimulus_height: 650,
-	maintain_aspect_ration: true,
+	maintain_aspect_ratio: true,
   response_ends_trial: false,
 };
 
