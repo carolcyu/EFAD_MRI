@@ -272,23 +272,111 @@ var MRIstart ={
  }
 };
 timeline.push(MRIstart);
-
+var fixation_start = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus: '<div style="font-size:60px;">+</div>',
+  choices: "NO_KEYS",
+  response_ends_trial: false,
+  trial_duration: 15000,
+  data: {
+    task: 'fixation_start'
+  }
+};	
+timeline.push(fixation_start);
 			var test_stimuli = [
-				{stimulus: window.task_github + 'iaps_neg/1525.jpg'}, {stimulus: window.task_github + 'iaps_neg/2345_1.jpg'}, {stimulus: window.task_github + 'iaps_neg/3150.jpg'},
-                {stimulus: window.task_github + 'iaps_neg/3170.jpg'}, {stimulus: window.task_github + 'iaps_neg/7380.jpg'}, {stimulus: window.task_github + 'iaps_neg/9140.jpg'},
-                {stimulus: window.task_github + 'iaps_neg/9184.jpg'}, {stimulus: window.task_github + 'iaps_neg/9301.jpg'}, {stimulus: window.task_github + 'iaps_neg/9326.jpg'},
-                {stimulus: window.task_github + 'iaps_neg/9611.jpg'}, {stimulus: window.task_github + 'iaps_neg/9903.jpg'}, {stimulus: window.task_github + 'iaps_neut/6150.jpg'},
-                {stimulus: window.task_github + 'iaps_neut/7001.jpg'}, {stimulus: window.task_github + 'iaps_neut/7002.jpg'}, {stimulus: window.task_github + 'iaps_neut/7009.jpg'},
-                {stimulus: window.task_github + 'iaps_neut/7026.jpg'}, {stimulus: window.task_github + 'iaps_neut/7052.jpg'}, {stimulus: window.task_github + 'iaps_neut/7055.jpg'},
-                {stimulus: window.task_github + 'iaps_neut/7080.jpg'}, {stimulus: window.task_github + 'iaps_neut/7100.jpg'}, {stimulus: window.task_github + 'iaps_neut/7150.jpg'},
-                {stimulus: window.task_github + 'iaps_neut/7705.jpg'}, {stimulus: window.task_github + 'sdvp/3068.jpg'}, {stimulus: window.task_github + 'sdvp/6570.jpg'},
-                {stimulus: window.task_github + 'sdvp/SDVPS_1.jpg'}, {stimulus: window.task_github + 'sdvp/SDVPS_2.jpg'}, {stimulus: window.task_github + 'sdvp/SDVPS_3.jpg'},
-                {stimulus: window.task_github + 'sdvp/SDVPS_4.jpg'}, {stimulus: window.task_github + 'sdvp/SDVPS_5.jpg'}, {stimulus: window.task_github + 'sdvp/SDVPS_6.jpg'},
-                {stimulus: window.task_github + 'sdvp/SDVPS_7.jpg'}, {stimulus: window.task_github + 'sdvp/SDVPS_8.jpg'}, {stimulus: window.task_github + 'iaps_pos/1463.jpg'},
-                {stimulus: window.task_github + 'iaps_pos/1811.jpg'}, {stimulus: window.task_github + 'iaps_pos/2071.jpg'}, {stimulus: window.task_github + 'iaps_pos/2154.jpg'},
-                {stimulus: window.task_github + 'iaps_pos/4610.jpg'}, {stimulus: window.task_github + 'iaps_pos/5480.jpg'}, {stimulus: window.task_github + 'iaps_pos/5829.jpg'},
-                {stimulus: window.task_github + 'iaps_pos/7400.jpg'}, {stimulus: window.task_github + 'iaps_pos/7492.jpg'}, {stimulus: window.task_github + 'iaps_pos/8380.jpg'},
-                {stimulus: window.task_github + 'iaps_pos/8503.jpg'}
+				{stimulus: window.task_github + 'iaps_neg/1525.jpg'}, 
+                {stimulus: window.task_github + 'iaps_neg/2345_1.jpg'}, 
+                {stimulus: window.task_github + 'iaps_neg/3150.jpg'},
+                {stimulus: window.task_github + 'iaps_neg/3170.jpg'}, 
+                {stimulus: window.task_github + 'iaps_neg/7380.jpg'}, 
+                {stimulus: window.task_github + 'iaps_neg/9140.jpg'},
+                {stimulus: window.task_github + 'iaps_neg/9184.jpg'}, 
+                {stimulus: window.task_github + 'iaps_neg/9301.jpg'}, 
+                {stimulus: window.task_github + 'iaps_neg/9326.jpg'},
+                {stimulus: window.task_github + 'iaps_neg/9611.jpg'}, 
+                {stimulus: window.task_github + 'iaps_neg/9903.jpg'}, 
+
+                {stimulus: window.task_github + 'iaps_pos/1463.jpg'},
+                {stimulus: window.task_github + 'iaps_pos/1811.jpg'}, 
+                {stimulus: window.task_github + 'iaps_pos/2071.jpg'}, 
+                {stimulus: window.task_github + 'iaps_pos/2154.jpg'},
+                {stimulus: window.task_github + 'iaps_pos/4610.jpg'}, 
+                {stimulus: window.task_github + 'iaps_pos/5480.jpg'}, 
+                {stimulus: window.task_github + 'iaps_pos/5829.jpg'},
+                {stimulus: window.task_github + 'iaps_pos/7400.jpg'}, 
+                {stimulus: window.task_github + 'iaps_pos/7492.jpg'}, 
+                {stimulus: window.task_github + 'iaps_pos/8380.jpg'},
+                {stimulus: window.task_github + 'iaps_pos/8503.jpg'},
+
+                {stimulus: window.task_github + 'sdvp/3068.jpg'}, 
+                {stimulus: window.task_github + 'sdvp/6570.jpg'},
+                {stimulus: window.task_github + 'sdvp/SDVPS_1.jpg'}, 
+                {stimulus: window.task_github + 'sdvp/SDVPS_2.jpg'}, 
+                {stimulus: window.task_github + 'sdvp/SDVPS_3.jpg'},
+                {stimulus: window.task_github + 'sdvp/SDVPS_4.jpg'}, 
+                {stimulus: window.task_github + 'sdvp/SDVPS_5.jpg'}, 
+                {stimulus: window.task_github + 'sdvp/SDVPS_6.jpg'},
+                {stimulus: window.task_github + 'sdvp/SDVPS_7.jpg'}, 
+                {stimulus: window.task_github + 'sdvp/SDVPS_8.jpg'}, 
+                
+                {stimulus: window.task_github + 'iaps_neut/6150.jpg'},
+                {stimulus: window.task_github + 'iaps_neut/7001.jpg'}, 
+                {stimulus: window.task_github + 'iaps_neut/7002.jpg'}, 
+                {stimulus: window.task_github + 'iaps_neut/7009.jpg'},
+                {stimulus: window.task_github + 'iaps_neut/7026.jpg'}, 
+                {stimulus: window.task_github + 'iaps_neut/7052.jpg'}, 
+                {stimulus: window.task_github + 'iaps_neut/7055.jpg'},
+                {stimulus: window.task_github + 'iaps_neut/7080.jpg'}, 
+                {stimulus: window.task_github + 'iaps_neut/7100.jpg'}, 
+                {stimulus: window.task_github + 'iaps_neut/7150.jpg'},
+                {stimulus: window.task_github + 'iaps_neut/7705.jpg'}, 
+
+                {stimulus: window.task_github + 'iaps_neg/1525.jpg'}, 
+                {stimulus: window.task_github + 'iaps_neg/2345_1.jpg'}, 
+                {stimulus: window.task_github + 'iaps_neg/3150.jpg'},
+                {stimulus: window.task_github + 'iaps_neg/3170.jpg'}, 
+                {stimulus: window.task_github + 'iaps_neg/7380.jpg'}, 
+                {stimulus: window.task_github + 'iaps_neg/9140.jpg'},
+                {stimulus: window.task_github + 'iaps_neg/9184.jpg'}, 
+                {stimulus: window.task_github + 'iaps_neg/9301.jpg'}, 
+                {stimulus: window.task_github + 'iaps_neg/9326.jpg'},
+                {stimulus: window.task_github + 'iaps_neg/9611.jpg'}, 
+                {stimulus: window.task_github + 'iaps_neg/9903.jpg'}, 
+
+                {stimulus: window.task_github + 'iaps_neut/6150.jpg'},
+                {stimulus: window.task_github + 'iaps_neut/7001.jpg'}, 
+                {stimulus: window.task_github + 'iaps_neut/7002.jpg'}, 
+                {stimulus: window.task_github + 'iaps_neut/7009.jpg'},
+                {stimulus: window.task_github + 'iaps_neut/7026.jpg'}, 
+                {stimulus: window.task_github + 'iaps_neut/7052.jpg'}, 
+                {stimulus: window.task_github + 'iaps_neut/7055.jpg'},
+                {stimulus: window.task_github + 'iaps_neut/7080.jpg'}, 
+                {stimulus: window.task_github + 'iaps_neut/7100.jpg'}, 
+                {stimulus: window.task_github + 'iaps_neut/7150.jpg'},
+                {stimulus: window.task_github + 'iaps_neut/7705.jpg'}, 
+
+                {stimulus: window.task_github + 'sdvp/3068.jpg'}, 
+                {stimulus: window.task_github + 'sdvp/6570.jpg'},
+                {stimulus: window.task_github + 'sdvp/SDVPS_1.jpg'}, 
+                {stimulus: window.task_github + 'sdvp/SDVPS_2.jpg'}, 
+                {stimulus: window.task_github + 'sdvp/SDVPS_3.jpg'},
+                {stimulus: window.task_github + 'sdvp/SDVPS_4.jpg'}, 
+                {stimulus: window.task_github + 'sdvp/SDVPS_5.jpg'}, 
+                {stimulus: window.task_github + 'sdvp/SDVPS_6.jpg'},
+                {stimulus: window.task_github + 'sdvp/SDVPS_7.jpg'}, 
+                {stimulus: window.task_github + 'sdvp/SDVPS_8.jpg'}, 
+
+                {stimulus: window.task_github + 'iaps_pos/1463.jpg'},
+                {stimulus: window.task_github + 'iaps_pos/1811.jpg'}, 
+                {stimulus: window.task_github + 'iaps_pos/2071.jpg'}, 
+                {stimulus: window.task_github + 'iaps_pos/2154.jpg'},
+                {stimulus: window.task_github + 'iaps_pos/4610.jpg'}, 
+                {stimulus: window.task_github + 'iaps_pos/5480.jpg'}, 
+                {stimulus: window.task_github + 'iaps_pos/5829.jpg'},
+                {stimulus: window.task_github + 'iaps_pos/7400.jpg'}, 
+                {stimulus: window.task_github + 'iaps_pos/7492.jpg'}, 
+                {stimulus: window.task_github + 'iaps_pos/8380.jpg'},
+                {stimulus: window.task_github + 'iaps_pos/8503.jpg'},
 			];
 
     var fixation = {
@@ -311,7 +399,8 @@ var test = { type: jsPsychImageKeyboardResponse, stimulus: jsPsych.timelineVaria
 
 var response = { 
 	type: jsPsychHtmlKeyboardResponse, stimulus: "<p>How would you rate this image?</p>", 
-	 choices: ['1', '2', '3', '4'], trial_duration: 1400, 
+	 choices: ['1', '2', '3', '4'], 
+     trial_duration: 1400, 
 	 response_ends_trial: false,
   data: {
     task: 'response'
@@ -321,23 +410,28 @@ var response = {
   }
 };
 
-			var test_procedure = { 
-				timeline: [fixation, test, response], timeline_variables: test_stimuli, repetitions: 2, randomize_order: false, post_trial_gap: 250 };
-			timeline.push(test_procedure);
-
-			var debrief_block = {
-  type: jsPsychHtmlKeyboardResponse,
-  stimulus: function() {
-
-    var trials = jsPsych.data.get().filter({task: 'response'});
-    var rt = Math.round(trials.select('rt').mean());
-
-    return '<p>Your average response time was ' + rt + 'ms.</p>' +
-      '<p>Press any key to complete the task. We appreciate your time!</p>';
-
-  }
+var test_procedure = { 
+timeline: [fixation, test, response], 
+timeline_variables: test_stimuli, 
+repetitions: 1, 
+randomize_order: false, 
+post_trial_gap: 250, 
 };
-timeline.push(debrief_block);
+timeline.push(test_procedure);
+
+
+var fixation_end = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus: '<div style="font-size:60px;">+</div>',
+  choices: "NO_KEYS",
+  response_ends_trial: false,
+  trial_duration: 15000,
+  data: {
+    task: 'fixation_end'
+  }
+};	
+timeline.push(fixation_end);
+
     /* start the experiment */
     jsPsych.run(timeline);
     
@@ -366,7 +460,7 @@ timeline.push(debrief_block);
                         return; // Ignore other keys
                     }
                 }
-                if (currentTrial && currentTrial.data && currentTrial.data.task === 'fixation') {
+                if (currentTrial && currentTrial.data && currentTrial.data.task === 'fixation','fixation_end','fixation_start') {
                 // If it is a fixation trial, IGNORE ALL key presses and DO NOT advance the trial.
                 console.log('Key ignored during fixation.');
                 return; 
